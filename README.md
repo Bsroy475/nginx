@@ -230,3 +230,5 @@ See our [changelog](https://nginx.org/en/CHANGES) to keep track of updates.
 
 ---
 Additional documentation available at: https://nginx.org/en/docs
+
+<!-- CI-24925: tip divergence marker 2026-09-28T07:30:47Z -->

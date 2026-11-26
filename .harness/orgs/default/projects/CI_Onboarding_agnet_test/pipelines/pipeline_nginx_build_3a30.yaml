@@ -1,0 +1,41 @@
+pipeline:
+  id: pipeline_nginx_build_3a30
+  name: pipeline_nginx_build_3a30
+  stages:
+    - name: Build
+      id: build
+      runtime: cloud
+      platform:
+        os: linux
+        arch: amd64
+      clone:
+        enabled: true
+      cache:
+        enabled: true
+      steps:
+        - name: Install Dependencies
+          id: install_dependencies
+          run:
+            shell: bash
+            script: |-
+              set -e
+              sudo apt-get update -qq
+              sudo apt-get install -y -qq build-essential libpcre3-dev zlib1g-dev libssl-dev
+              gcc --version
+              make --version
+        - name: Configure
+          id: configure
+          run:
+            shell: bash
+            script: |-
+              set -e
+              ./auto/configure --with-http_ssl_module
+        - name: Build
+          id: build_nginx
+          run:
+            shell: bash
+            script: |-
+              set -e
+              make
+  tags:
+    onboarding: "true"
